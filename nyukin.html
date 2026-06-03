@@ -6,7 +6,7 @@
   <!-- 拡大防止・スマホ表示最適化 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-  <title>本数あまり計算</title>
+  <title>ちりんちりん計算くん</title>
 
   <style>
     * {
@@ -128,6 +128,8 @@
       cursor: pointer;
       box-shadow: inset 0 -6px 0 rgba(0,0,0,0.28);
       touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     button:active {
@@ -243,7 +245,7 @@
 <body>
   <main class="app">
     <div>
-      <div class="title">本数あまり計算</div>
+      <div class="title">ちりんちりん計算くん</div>
       <div class="subtitle">350円固定</div>
     </div>
 
@@ -259,21 +261,21 @@
     </section>
 
     <section class="keypad">
-      <button onclick="addNumber('7')">7</button>
-      <button onclick="addNumber('8')">8</button>
-      <button onclick="addNumber('9')">9</button>
+      <button type="button" onclick="addNumber('7')">7</button>
+      <button type="button" onclick="addNumber('8')">8</button>
+      <button type="button" onclick="addNumber('9')">9</button>
 
-      <button onclick="addNumber('4')">4</button>
-      <button onclick="addNumber('5')">5</button>
-      <button onclick="addNumber('6')">6</button>
+      <button type="button" onclick="addNumber('4')">4</button>
+      <button type="button" onclick="addNumber('5')">5</button>
+      <button type="button" onclick="addNumber('6')">6</button>
 
-      <button onclick="addNumber('1')">1</button>
-      <button onclick="addNumber('2')">2</button>
-      <button onclick="addNumber('3')">3</button>
+      <button type="button" onclick="addNumber('1')">1</button>
+      <button type="button" onclick="addNumber('2')">2</button>
+      <button type="button" onclick="addNumber('3')">3</button>
 
-      <button onclick="addNumber('0')">0</button>
-      <button class="back-button" onclick="backspace()">←</button>
-      <button class="reset-button" onclick="resetAll()">リセット</button>
+      <button type="button" onclick="addNumber('0')">0</button>
+      <button type="button" class="back-button" onclick="backspace()">←</button>
+      <button type="button" class="reset-button" onclick="resetAll()">リセット</button>
     </section>
   </main>
 
@@ -316,24 +318,7 @@
         "あまり " + remain.toLocaleString("ja-JP") + "円";
     }
 
-    // iPhone/iPad Safariのダブルタップズーム対策
-    let lastTouchEnd = 0;
-
-    document.addEventListener(
-      "touchend",
-      function(event) {
-        const now = Date.now();
-
-        if (now - lastTouchEnd <= 300) {
-          event.preventDefault();
-        }
-
-        lastTouchEnd = now;
-      },
-      { passive: false }
-    );
-
-    // ダブルクリック拡大対策
+    // ダブルクリック拡大対策だけ残す
     document.addEventListener("dblclick", function(event) {
       event.preventDefault();
     });
