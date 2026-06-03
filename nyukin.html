@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- ダブルタップ拡大・ピンチ拡大を抑える -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>本数あまり計算</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background: #111;
+      color: #fff;
+      overflow: hidden;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      height: 100dvh;
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr;
+      gap: 14px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-top: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 18px;
+      color: #aaa;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .result {
+      background: #062b13;
+      border: 4px solid #0f8f3d;
+      border-radius: 24px;
+      padding: 22px 10px;
+      text-align: center;
+    }
+
+    .result-label {
+      font-size: 22px;
+      font-weight: 900;
+      opacity: 0.9;
+      margin-bottom: 6px;
+    }
+
+    .result-main {
+      font-size: 58px;
+      font-weight: 1000;
+      line-height: 1.05;
+    }
+
+    .result-sub {
+      font-size: 28px;
+      font-weight: 900;
+      color: #d8ffd8;
+      margin-top: 4px;
+    }
+
+    .amount-box {
+      background: #1d1d1d;
+      border: 3px solid #444;
+      border-radius: 22px;
+      padding: 18px 10px;
+      text-align: center;
+    }
+
+    .label {
+      font-size: 22px;
+      font-weight: 900;
+      color: #ddd;
+      margin-bottom: 4px;
+    }
+
+    .amount {
+      font-size: 54px;
+      font-weight: 1000;
+      line-height: 1.05;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 12px;
+      min-height: 390px;
+    }
+
+    button {
+      border: none;
+      border-radius: 20px;
+      font-size: 38px;
+      font-weight: 1000;
+      color: #fff;
+      background: #303030;
+      cursor: pointer;
+      box-shadow: inset 0 -6px 0 rgba(0,0,0,0.28);
+      touch-action: manipulation;
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 -3px 0 rgba(0,0,0,0.28);
+    }
+
+    .back-button {
+      color: #ff5a5a;
+      background: #333;
+    }
+
+    .reset-button {
+      background: #0b6b2b;
+      color: #fff;
+      font-size: 30px;
+    }
+
+    .zero-button {
+      grid-column: span 1;
+    }
+
+    .note {
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      font-weight: 700;
+      margin-top: -6px;
+    }
+
+    @media (max-height: 700px) {
+      .app {
+        gap: 10px;
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 24px;
+      }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .result {
+        padding: 16px 8px;
+      }
+
+      .result-main {
+        font-size: 48px;
+      }
+
+      .result-sub {
+        font-size: 24px;
+      }
+
+      .amount-box {
+        padding: 14px 8px;
+      }
+
+      .amount {
+        font-size: 46px;
+      }
+
+      .keypad {
+        min-height: 320px;
+        gap: 9px;
+      }
+
+      button {
+        font-size: 34px;
+        border-radius: 18px;
+      }
+
+      .reset-button {
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div>
+      <div class="title">本数あまり計算</div>
+      <div class="subtitle">350円固定</div>
+    </div>
+
+    <section class="result">
+      <div class="result-label">計算結果</div>
+      <div class="result-main" id="countText">0本</div>
+      <div class="result-sub" id="remainText">あまり 0円</div>
+    </section>
+
+    <section class="amount-box">
+      <div class="label">入金額</div>
+      <div class="amount" id="amount">¥0</div>
+    </section>
+
+    <section class="keypad">
+      <button onclick="addNumber('7')">7</button>
+      <button onclick="addNumber('8')">8</button>
+      <button onclick="addNumber('9')">9</button>
+
+      <button onclick="addNumber('4')">4</button>
+      <button onclick="addNumber('5')">5</button>
+      <button onclick="addNumber('6')">6</button>
+
+      <button onclick="addNumber('1')">1</button>
+      <button onclick="addNumber('2')">2</button>
+      <button onclick="addNumber('3')">3</button>
+
+      <button class="zero-button" onclick="addNumber('0')">0</button>
+      <button class="back-button" onclick="backspace()">←</button>
+      <button class="reset-button" onclick="resetAll()">リセット</button>
+    </section>
+  </main>
+
+  <script>
+    const PRICE = 350;
+    let input = "";
+
+    function yen(value) {
+      return "¥" + Number(value).toLocaleString("ja-JP");
+    }
+
+    function addNumber(num) {
+      if (input.length >= 8) return;
+
+      // 最初に0だけ連打されるのを防ぐ
+      if (input === "" && num === "0") return;
+
+      input += num;
+      update();
+    }
+
+    function backspace() {
+      input = input.slice(0, -1);
+      update();
+    }
+
+    function resetAll() {
+      input = "";
+      update();
+    }
+
+    function update() {
+      const amount = input === "" ? 0 : Number(input);
+      const count = Math.floor(amount / PRICE);
+      const remain = amount % PRICE;
+
+      document.getElementById("amount").textContent = yen(amount);
+      document.getElementById("countText").textContent = count + "本";
+      document.getElementById("remainText").textContent = "あまり " + remain.toLocaleString("ja-JP") + "円";
+    }
+
+    // iPhone/iPad Safariのダブルタップズーム対策
+    let lastTouchEnd = 0;
+    document.addEventListener("touchend", function(event) {
+      const now = Date.now();
+      if (now - lastTouchEnd <= 300) {
+        event.preventDefault();
+      }
+      lastTouchEnd = now;
+    }, { passive: false });
+
+    // ダブルクリック拡大対策
+    document.addEventListener("dblclick", function(event) {
+      event.preventDefault();
+    });
+
+    update();
+  </script>
+</body>
+</html>
