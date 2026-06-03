@@ -83,10 +83,11 @@
     }
 
     .result-sub {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 900;
       color: #d8ffd8;
-      margin-top: 2px;
+      margin-top: 4px;
+      white-space: nowrap;
     }
 
     .amount-box {
@@ -176,7 +177,7 @@
       }
 
       .result-sub {
-        font-size: 21px;
+        font-size: 18px;
       }
 
       .amount-box {
@@ -220,7 +221,7 @@
       }
 
       .result-sub {
-        font-size: 19px;
+        font-size: 16px;
       }
 
       .amount {
@@ -252,7 +253,7 @@
     <section class="result">
       <div class="result-label">計算結果</div>
       <div class="result-main" id="countText">0本</div>
-      <div class="result-sub" id="remainText">あまり 0円</div>
+      <div class="result-sub" id="remainText">ピッタリ！</div>
     </section>
 
     <section class="amount-box">
@@ -314,11 +315,23 @@
 
       document.getElementById("amount").textContent = yen(amount);
       document.getElementById("countText").textContent = count + "本";
-      document.getElementById("remainText").textContent =
-        "あまり " + remain.toLocaleString("ja-JP") + "円";
+
+      if (amount === 0) {
+        document.getElementById("remainText").textContent = "ピッタリ！";
+      } else if (remain === 0) {
+        document.getElementById("remainText").textContent = "ピッタリ！";
+      } else {
+        const need = PRICE - remain;
+        document.getElementById("remainText").textContent =
+          "あまり" +
+          remain.toLocaleString("ja-JP") +
+          "円　あと" +
+          need.toLocaleString("ja-JP") +
+          "円で丁度";
+      }
     }
 
-    // ダブルクリック拡大対策だけ残す
+    // ダブルクリック拡大対策
     document.addEventListener("dblclick", function(event) {
       event.preventDefault();
     });
