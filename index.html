@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>屋台おつり計算</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+      background: #111;
+      color: #fff;
+      overflow: hidden;
+      touch-action: manipulation;
+      user-select: none;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 520px;
+      height: 100dvh;
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto auto 1fr auto auto;
+      gap: 10px;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 800;
+      opacity: 0.9;
+    }
+
+    .count-row {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1.8fr 1fr 1.2fr;
+      gap: 8px;
+    }
+
+    button {
+      border: none;
+      border-radius: 16px;
+      font-weight: 900;
+      color: #fff;
+      background: #333;
+      font-size: 28px;
+      cursor: pointer;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25);
+    }
+
+    button:active {
+      transform: translateY(2px);
+      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
+    }
+
+    .count-button {
+      height: 72px;
+    }
+
+    .count-display {
+      height: 72px;
+      border-radius: 16px;
+      background: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 900;
+      border: 2px solid #444;
+    }
+
+    .money-box {
+      border-radius: 20px;
+      background: #1d1d1d;
+      padding: 10px 14px;
+      text-align: center;
+      border: 2px solid #333;
+    }
+
+    .label {
+      font-size: 18px;
+      font-weight: 800;
+      opacity: 0.75;
+      margin-bottom: 2px;
+    }
+
+    .total {
+      font-size: 42px;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .received-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+    }
+
+    .clear-button {
+      height: 76px;
+      background: #555;
+      font-size: 30px;
+    }
+
+    .received-display {
+      height: 76px;
+      border-radius: 18px;
+      background: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #444;
+    }
+
+    .received-label {
+      font-size: 15px;
+      font-weight: 800;
+      opacity: 0.75;
+      line-height: 1;
+    }
+
+    .received-money {
+      font-size: 36px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 8px;
+      min-height: 150px;
+    }
+
+    .num-button {
+      font-size: 34px;
+      background: #2f2f2f;
+    }
+
+    .change-box {
+      border-radius: 22px;
+      background: #062b13;
+      padding: 10px 14px;
+      text-align: center;
+      border: 3px solid #0f7a35;
+    }
+
+    .change-label {
+      font-size: 20px;
+      font-weight: 900;
+      opacity: 0.9;
+    }
+
+    .change-money {
+      font-size: 56px;
+      font-weight: 1000;
+      line-height: 1.05;
+    }
+
+    .shortage {
+      background: #3a0b0b;
+      border-color: #a51d1d;
+    }
+
+    .finish-button {
+      height: 70px;
+      background: #8b1e1e;
+      font-size: 30px;
+      border-radius: 18px;
+    }
+
+    .small-note {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.55;
+      margin-top: -4px;
+    }
+
+    @media (max-height: 660px) {
+      .app {
+        gap: 7px;
+        padding: 8px;
+      }
+
+      .title {
+        font-size: 17px;
+      }
+
+      .count-button,
+      .count-display {
+        height: 60px;
+      }
+
+      .count-display {
+        font-size: 30px;
+      }
+
+      .total {
+        font-size: 36px;
+      }
+
+      .received-row {
+        grid-template-columns: 64px 1fr;
+      }
+
+      .clear-button,
+      .received-display {
+        height: 66px;
+      }
+
+      .received-money {
+        font-size: 31px;
+      }
+
+      .keypad {
+        min-height: 124px;
+      }
+
+      .num-button {
+        font-size: 30px;
+      }
+
+      .change-money {
+        font-size: 46px;
+      }
+
+      .finish-button {
+        height: 60px;
+        font-size: 26px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div>
+      <div class="title">屋台おつり計算</div>
+      <div class="small-note">350円固定</div>
+    </div>
+
+    <section class="count-row">
+      <button class="count-button" id="setOne">1本</button>
+      <button class="count-button" id="minus">−</button>
+      <div class="count-display" id="countDisplay">1本</div>
+      <button class="count-button" id="plus">＋</button>
+      <button class="count-button" id="plusFive">＋5</button>
+    </section>
+
+    <section class="money-box">
+      <div class="label">販売金額</div>
+      <div class="total" id="totalDisplay">¥350</div>
+    </section>
+
+    <section class="received-row">
+      <button class="clear-button" id="clearReceived">0</button>
+      <div class="received-display">
+        <div class="received-label">受取金額</div>
+        <div class="received-money" id="receivedDisplay">¥0</div>
+      </div>
+    </section>
+
+    <section class="keypad">
+      <button class="num-button" data-num="1">1</button>
+      <button class="num-button" data-num="2">2</button>
+      <button class="num-button" data-num="3">3</button>
+      <button class="num-button" data-num="4">4</button>
+      <button class="num-button" data-num="5">5</button>
+      <button class="num-button" data-num="6">6</button>
+      <button class="num-button" data-num="7">7</button>
+      <button class="num-button" data-num="8">8</button>
+      <button class="num-button" data-num="9">9</button>
+      <button class="num-button" data-num="0">0</button>
+    </section>
+
+    <section class="change-box" id="changeBox">
+      <div class="change-label" id="changeLabel">おつり</div>
+      <div class="change-money" id="changeDisplay">¥0</div>
+    </section>
+
+    <button class="finish-button" id="finish">会計完了</button>
+  </main>
+
+  <script>
+    const PRICE = 350;
+
+    let count = 1;
+    let receivedText = "";
+
+    const countDisplay = document.getElementById("countDisplay");
+    const totalDisplay = document.getElementById("totalDisplay");
+    const receivedDisplay = document.getElementById("receivedDisplay");
+    const changeDisplay = document.getElementById("changeDisplay");
+    const changeBox = document.getElementById("changeBox");
+    const changeLabel = document.getElementById("changeLabel");
+
+    function yen(value) {
+      return "¥" + Number(value).toLocaleString("ja-JP");
+    }
+
+    function getReceived() {
+      return receivedText === "" ? 0 : Number(receivedText);
+    }
+
+    function update() {
+      const total = count * PRICE;
+      const received = getReceived();
+      const change = received - total;
+
+      countDisplay.textContent = count + "本";
+      totalDisplay.textContent = yen(total);
+      receivedDisplay.textContent = yen(received);
+
+      if (received === 0) {
+        changeBox.classList.remove("shortage");
+        changeLabel.textContent = "おつり";
+        changeDisplay.textContent = yen(0);
+        return;
+      }
+
+      if (change < 0) {
+        changeBox.classList.add("shortage");
+        changeLabel.textContent = "不足";
+        changeDisplay.textContent = yen(Math.abs(change));
+      } else {
+        changeBox.classList.remove("shortage");
+        changeLabel.textContent = "おつり";
+        changeDisplay.textContent = yen(change);
+      }
+    }
+
+    function resetAll() {
+      count = 1;
+      receivedText = "";
+      update();
+    }
+
+    document.getElementById("setOne").addEventListener("click", () => {
+      count = 1;
+      update();
+    });
+
+    document.getElementById("minus").addEventListener("click", () => {
+      count = Math.max(1, count - 1);
+      update();
+    });
+
+    document.getElementById("plus").addEventListener("click", () => {
+      count += 1;
+      update();
+    });
+
+    document.getElementById("plusFive").addEventListener("click", () => {
+      count += 5;
+      update();
+    });
+
+    document.getElementById("clearReceived").addEventListener("click", () => {
+      receivedText = "";
+      update();
+    });
+
+    document.getElementById("finish").addEventListener("click", resetAll);
+
+    document.querySelectorAll(".num-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const num = button.dataset.num;
+
+        if (receivedText.length >= 6) return;
+
+        if (receivedText === "" && num === "0") {
+          return;
+        }
+
+        receivedText += num;
+        update();
+      });
+    });
+
+    update();
+  </script>
+</body>
+</html>
