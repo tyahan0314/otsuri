@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
 
-  <!-- ダブルタップ拡大・ピンチ拡大を抑える -->
+  <!-- 拡大防止・スマホ表示最適化 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
   <title>本数あまり計算</title>
@@ -39,89 +39,89 @@
       width: 100%;
       max-width: 520px;
       height: 100dvh;
-      padding: 14px;
+      padding: 10px;
       display: grid;
       grid-template-rows: auto auto auto 1fr;
-      gap: 14px;
+      gap: 9px;
     }
 
     .title {
       text-align: center;
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 900;
-      line-height: 1.1;
-      margin-top: 6px;
+      line-height: 1.05;
+      margin-top: 2px;
     }
 
     .subtitle {
       text-align: center;
-      font-size: 18px;
+      font-size: 16px;
       color: #aaa;
       font-weight: 700;
-      margin-top: 2px;
+      margin-top: 0;
     }
 
     .result {
       background: #062b13;
       border: 4px solid #0f8f3d;
-      border-radius: 24px;
-      padding: 22px 10px;
+      border-radius: 22px;
+      padding: 14px 8px;
       text-align: center;
     }
 
     .result-label {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 900;
       opacity: 0.9;
-      margin-bottom: 6px;
+      margin-bottom: 2px;
     }
 
     .result-main {
-      font-size: 58px;
+      font-size: 46px;
       font-weight: 1000;
-      line-height: 1.05;
+      line-height: 1;
     }
 
     .result-sub {
-      font-size: 28px;
+      font-size: 24px;
       font-weight: 900;
       color: #d8ffd8;
-      margin-top: 4px;
+      margin-top: 2px;
     }
 
     .amount-box {
       background: #1d1d1d;
       border: 3px solid #444;
-      border-radius: 22px;
-      padding: 18px 10px;
+      border-radius: 20px;
+      padding: 12px 8px;
       text-align: center;
     }
 
     .label {
-      font-size: 22px;
+      font-size: 18px;
       font-weight: 900;
       color: #ddd;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .amount {
-      font-size: 54px;
+      font-size: 44px;
       font-weight: 1000;
-      line-height: 1.05;
+      line-height: 1;
     }
 
     .keypad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(4, 1fr);
-      gap: 12px;
-      min-height: 390px;
+      gap: 9px;
+      min-height: 300px;
     }
 
     button {
       border: none;
-      border-radius: 20px;
-      font-size: 38px;
+      border-radius: 18px;
+      font-size: 32px;
       font-weight: 1000;
       color: #fff;
       background: #303030;
@@ -143,67 +143,98 @@
     .reset-button {
       background: #0b6b2b;
       color: #fff;
-      font-size: 30px;
-    }
-
-    .zero-button {
-      grid-column: span 1;
-    }
-
-    .note {
-      text-align: center;
-      color: #888;
-      font-size: 14px;
-      font-weight: 700;
-      margin-top: -6px;
+      font-size: 24px;
     }
 
     @media (max-height: 700px) {
       .app {
-        gap: 10px;
-        padding: 10px;
+        padding: 8px;
+        gap: 7px;
       }
 
       .title {
-        font-size: 24px;
+        font-size: 22px;
       }
 
       .subtitle {
-        font-size: 16px;
+        font-size: 15px;
       }
 
       .result {
-        padding: 16px 8px;
+        padding: 10px 8px;
+        border-radius: 20px;
+      }
+
+      .result-label {
+        font-size: 16px;
       }
 
       .result-main {
-        font-size: 48px;
+        font-size: 40px;
       }
 
       .result-sub {
-        font-size: 24px;
+        font-size: 21px;
       }
 
       .amount-box {
-        padding: 14px 8px;
+        padding: 9px 8px;
+      }
+
+      .label {
+        font-size: 16px;
       }
 
       .amount {
-        font-size: 46px;
+        font-size: 38px;
       }
 
       .keypad {
-        min-height: 320px;
-        gap: 9px;
+        min-height: 260px;
+        gap: 7px;
       }
 
       button {
-        font-size: 34px;
-        border-radius: 18px;
+        font-size: 28px;
+        border-radius: 16px;
       }
 
       .reset-button {
-        font-size: 26px;
+        font-size: 22px;
+      }
+    }
+
+    @media (max-height: 620px) {
+      .title {
+        font-size: 20px;
+      }
+
+      .subtitle {
+        font-size: 14px;
+      }
+
+      .result-main {
+        font-size: 36px;
+      }
+
+      .result-sub {
+        font-size: 19px;
+      }
+
+      .amount {
+        font-size: 34px;
+      }
+
+      .keypad {
+        min-height: 230px;
+      }
+
+      button {
+        font-size: 25px;
+      }
+
+      .reset-button {
+        font-size: 20px;
       }
     }
   </style>
@@ -240,7 +271,7 @@
       <button onclick="addNumber('2')">2</button>
       <button onclick="addNumber('3')">3</button>
 
-      <button class="zero-button" onclick="addNumber('0')">0</button>
+      <button onclick="addNumber('0')">0</button>
       <button class="back-button" onclick="backspace()">←</button>
       <button class="reset-button" onclick="resetAll()">リセット</button>
     </section>
@@ -257,7 +288,7 @@
     function addNumber(num) {
       if (input.length >= 8) return;
 
-      // 最初に0だけ連打されるのを防ぐ
+      // 最初に0だけ入るのを防ぐ
       if (input === "" && num === "0") return;
 
       input += num;
@@ -281,18 +312,26 @@
 
       document.getElementById("amount").textContent = yen(amount);
       document.getElementById("countText").textContent = count + "本";
-      document.getElementById("remainText").textContent = "あまり " + remain.toLocaleString("ja-JP") + "円";
+      document.getElementById("remainText").textContent =
+        "あまり " + remain.toLocaleString("ja-JP") + "円";
     }
 
     // iPhone/iPad Safariのダブルタップズーム対策
     let lastTouchEnd = 0;
-    document.addEventListener("touchend", function(event) {
-      const now = Date.now();
-      if (now - lastTouchEnd <= 300) {
-        event.preventDefault();
-      }
-      lastTouchEnd = now;
-    }, { passive: false });
+
+    document.addEventListener(
+      "touchend",
+      function(event) {
+        const now = Date.now();
+
+        if (now - lastTouchEnd <= 300) {
+          event.preventDefault();
+        }
+
+        lastTouchEnd = now;
+      },
+      { passive: false }
+    );
 
     // ダブルクリック拡大対策
     document.addEventListener("dblclick", function(event) {
