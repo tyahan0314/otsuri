@@ -47,7 +47,7 @@
 
     button {
       border: none;
-      border-radius: 15px;
+      border-radius: 16px;
       font-weight: 900;
       color: #fff;
       background: #303030;
@@ -65,23 +65,23 @@
 
     .count-row {
       display: grid;
-      grid-template-columns: 1.15fr 0.9fr 1.9fr 0.9fr 1.15fr;
-      gap: 7px;
+      grid-template-columns: 0.85fr 2.1fr 0.85fr 1fr;
+      gap: 8px;
     }
 
     .count-button,
     .count-display {
-      height: 62px;
-      border-radius: 15px;
+      height: 76px;
+      border-radius: 16px;
     }
 
     .count-button {
-      font-size: 25px;
+      font-size: 34px;
     }
 
     .count-display {
       background: #222;
-      border: 2px solid #444;
+      border: 3px solid #444;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -90,19 +90,15 @@
     }
 
     .count-main {
-      font-size: 27px;
+      font-size: 34px;
       font-weight: 1000;
     }
 
     .count-price {
-      margin-top: 2px;
-      font-size: 15px;
-      font-weight: 900;
-      opacity: 0.75;
-    }
-
-    #setOne {
-      background: #0b6b2b;
+      margin-top: 5px;
+      font-size: 26px;
+      font-weight: 1000;
+      opacity: 0.95;
     }
 
     #minus {
@@ -114,66 +110,53 @@
       color: #5aa7ff;
     }
 
-    .section-label {
-      text-align: center;
-      font-size: 16px;
-      font-weight: 900;
-      opacity: 0.8;
-      margin-bottom: 4px;
-    }
-
     .received-section {
       background: #1d1d1d;
-      border: 2px solid #444;
-      border-radius: 18px;
+      border: 3px solid #444;
+      border-radius: 20px;
       padding: 8px;
     }
 
     .received-row {
       display: grid;
-      grid-template-columns: 92px 1fr;
+      grid-template-columns: 100px 1fr;
       gap: 8px;
       align-items: center;
     }
 
     .clear-button {
-      height: 60px;
+      height: 70px;
       background: #0b6b2b;
       font-size: 22px;
     }
 
     .received-money {
-      height: 60px;
-      border-radius: 15px;
+      height: 70px;
+      border-radius: 16px;
       background: #222;
       border: 2px solid #3a3a3a;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 1000;
       line-height: 1;
+      white-space: nowrap;
     }
 
     .change-section {
       background: #062b13;
-      border: 3px solid #0f7a35;
-      border-radius: 20px;
-      padding: 9px 10px;
+      border: 4px solid #0f7a35;
+      border-radius: 22px;
+      padding: 16px 10px;
       text-align: center;
     }
 
-    .change-label {
-      font-size: 18px;
-      font-weight: 900;
-      opacity: 0.9;
-      margin-bottom: 2px;
-    }
-
     .change-money {
-      font-size: 48px;
+      font-size: 50px;
       font-weight: 1000;
       line-height: 1;
+      white-space: nowrap;
     }
 
     .shortage {
@@ -188,9 +171,9 @@
     }
 
     .cash-button {
-      height: 62px;
+      height: 68px;
       background: #26384d;
-      font-size: 27px;
+      font-size: 30px;
     }
 
     .keypad {
@@ -202,7 +185,7 @@
     }
 
     .num-button {
-      font-size: 34px;
+      font-size: 36px;
       font-weight: 1000;
     }
 
@@ -212,7 +195,7 @@
 
     .finish-button {
       background: #8b1e1e;
-      font-size: 22px;
+      font-size: 21px;
       line-height: 1.1;
       padding: 0 4px;
     }
@@ -225,58 +208,46 @@
 
       .count-button,
       .count-display {
-        height: 54px;
+        height: 62px;
       }
 
       .count-button {
-        font-size: 22px;
+        font-size: 28px;
       }
 
       .count-main {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       .count-price {
-        font-size: 13px;
-      }
-
-      .section-label {
-        font-size: 14px;
-        margin-bottom: 3px;
-      }
-
-      .received-section {
-        padding: 6px;
+        font-size: 22px;
+        margin-top: 3px;
       }
 
       .clear-button,
       .received-money {
-        height: 52px;
+        height: 58px;
       }
 
       .clear-button {
-        font-size: 19px;
+        font-size: 20px;
       }
 
       .received-money {
-        font-size: 31px;
+        font-size: 29px;
       }
 
       .change-section {
-        padding: 7px 8px;
-      }
-
-      .change-label {
-        font-size: 15px;
+        padding: 11px 8px;
       }
 
       .change-money {
-        font-size: 40px;
+        font-size: 41px;
       }
 
       .cash-button {
-        height: 52px;
-        font-size: 24px;
+        height: 56px;
+        font-size: 26px;
       }
 
       .keypad {
@@ -285,43 +256,35 @@
       }
 
       .num-button {
-        font-size: 29px;
+        font-size: 30px;
       }
 
       .finish-button {
-        font-size: 19px;
+        font-size: 18px;
       }
     }
 
     @media (max-height: 620px) {
-      .app {
-        gap: 5px;
-      }
-
       .count-button,
       .count-display {
-        height: 48px;
-      }
-
-      .count-button {
-        font-size: 20px;
+        height: 54px;
       }
 
       .count-main {
-        font-size: 22px;
+        font-size: 24px;
       }
 
       .count-price {
-        font-size: 12px;
+        font-size: 18px;
       }
 
       .clear-button,
       .received-money {
-        height: 46px;
+        height: 50px;
       }
 
       .received-money {
-        font-size: 27px;
+        font-size: 25px;
       }
 
       .change-money {
@@ -329,8 +292,8 @@
       }
 
       .cash-button {
-        height: 46px;
-        font-size: 21px;
+        height: 48px;
+        font-size: 22px;
       }
 
       .keypad {
@@ -338,11 +301,11 @@
       }
 
       .num-button {
-        font-size: 25px;
+        font-size: 26px;
       }
 
       .finish-button {
-        font-size: 17px;
+        font-size: 16px;
       }
     }
   </style>
@@ -351,7 +314,6 @@
 <body>
   <main class="app">
     <section class="count-row">
-      <button class="count-button" id="setOne">1本</button>
       <button class="count-button" id="minus">−</button>
 
       <div class="count-display">
@@ -364,16 +326,14 @@
     </section>
 
     <section class="received-section">
-      <div class="section-label">受取金額</div>
       <div class="received-row">
         <button class="clear-button" id="clearReceived">クリア</button>
-        <div class="received-money" id="receivedDisplay">¥0</div>
+        <div class="received-money" id="receivedDisplay">受取金額：¥0</div>
       </div>
     </section>
 
     <section class="change-section" id="changeBox">
-      <div class="change-label" id="changeLabel">おつり</div>
-      <div class="change-money" id="changeDisplay">¥0</div>
+      <div class="change-money" id="changeDisplay">お釣り：¥0</div>
     </section>
 
     <section class="cash-row">
@@ -412,7 +372,6 @@
     const receivedDisplay = document.getElementById("receivedDisplay");
     const changeDisplay = document.getElementById("changeDisplay");
     const changeBox = document.getElementById("changeBox");
-    const changeLabel = document.getElementById("changeLabel");
 
     function yen(value) {
       return "¥" + Number(value).toLocaleString("ja-JP");
@@ -423,12 +382,7 @@
     }
 
     function setReceived(value) {
-      if (value <= 0) {
-        receivedText = "";
-      } else {
-        receivedText = String(value);
-      }
-
+      receivedText = value <= 0 ? "" : String(value);
       update();
     }
 
@@ -439,23 +393,20 @@
 
       countDisplay.textContent = count + "本";
       totalDisplay.textContent = yen(total);
-      receivedDisplay.textContent = yen(received);
+      receivedDisplay.textContent = "受取金額：" + yen(received);
 
       if (received === 0) {
         changeBox.classList.remove("shortage");
-        changeLabel.textContent = "おつり";
-        changeDisplay.textContent = yen(0);
+        changeDisplay.textContent = "お釣り：" + yen(0);
         return;
       }
 
       if (change < 0) {
         changeBox.classList.add("shortage");
-        changeLabel.textContent = "不足";
-        changeDisplay.textContent = yen(Math.abs(change));
+        changeDisplay.textContent = "不足：" + yen(Math.abs(change));
       } else {
         changeBox.classList.remove("shortage");
-        changeLabel.textContent = "おつり";
-        changeDisplay.textContent = yen(change);
+        changeDisplay.textContent = "お釣り：" + yen(change);
       }
     }
 
@@ -464,11 +415,6 @@
       receivedText = "";
       update();
     }
-
-    document.getElementById("setOne").addEventListener("click", () => {
-      count = 1;
-      update();
-    });
 
     document.getElementById("minus").addEventListener("click", () => {
       count = Math.max(1, count - 1);
