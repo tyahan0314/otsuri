@@ -23,6 +23,7 @@
       overflow: hidden;
       touch-action: manipulation;
       user-select: none;
+      -webkit-user-select: none;
     }
 
     body {
@@ -35,53 +36,45 @@
       width: 100%;
       max-width: 520px;
       height: 100dvh;
-      padding: 12px;
+      padding: 8px;
       display: grid;
-      grid-template-rows: auto auto auto 1fr auto auto;
-      gap: 10px;
+      grid-template-rows: auto auto auto auto auto 1fr auto auto;
+      gap: 7px;
     }
 
     .title {
       text-align: center;
       font-size: 20px;
-      font-weight: 800;
-      opacity: 0.9;
+      font-weight: 900;
+      line-height: 1.05;
+    }
+
+    .small-note {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.6;
+      font-weight: 700;
     }
 
     .count-row {
       display: grid;
       grid-template-columns: 1.2fr 1fr 1.8fr 1fr 1.2fr;
-      gap: 8px;
+      gap: 7px;
     }
 
     button {
       border: none;
-      border-radius: 16px;
+      border-radius: 15px;
       font-weight: 900;
       color: #fff;
       background: #333;
-      font-size: 28px;
+      font-size: 25px;
       cursor: pointer;
       box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25);
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
     }
-
-    /* 1本にする・受取金額0リセット */
-#setOne,
-#clearReceived {
-  background: #0b6b2b;
-  color: #fff;
-}
-
-/* マイナスボタン */
-#minus {
-  color: #ff5a5a;
-}
-
-/* プラスボタン */
-#plus,
-#plusFive {
-  color: #5aa7ff;
-}
 
     button:active {
       transform: translateY(2px);
@@ -89,57 +82,71 @@
     }
 
     .count-button {
-      height: 72px;
+      height: 58px;
     }
 
     .count-display {
-      height: 72px;
-      border-radius: 16px;
+      height: 58px;
+      border-radius: 15px;
       background: #222;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 34px;
+      font-size: 30px;
       font-weight: 900;
       border: 2px solid #444;
     }
 
+    #setOne,
+    #clearReceived {
+      background: #0b6b2b;
+      color: #fff;
+    }
+
+    #minus {
+      color: #ff5a5a;
+    }
+
+    #plus,
+    #plusFive {
+      color: #5aa7ff;
+    }
+
     .money-box {
-      border-radius: 20px;
+      border-radius: 18px;
       background: #1d1d1d;
-      padding: 10px 14px;
+      padding: 8px 12px;
       text-align: center;
       border: 2px solid #333;
     }
 
     .label {
-      font-size: 18px;
-      font-weight: 800;
+      font-size: 16px;
+      font-weight: 900;
       opacity: 0.75;
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
 
     .total {
-      font-size: 42px;
-      font-weight: 900;
-      line-height: 1.05;
+      font-size: 36px;
+      font-weight: 1000;
+      line-height: 1;
     }
 
     .received-row {
       display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 10px;
+      grid-template-columns: 82px 1fr;
+      gap: 8px;
     }
 
     .clear-button {
-      height: 76px;
-      background: #555;
-      font-size: 30px;
+      height: 62px;
+      font-size: 22px;
     }
 
     .received-display {
-      height: 76px;
-      border-radius: 18px;
+      height: 62px;
+      border-radius: 16px;
       background: #222;
       display: flex;
       flex-direction: column;
@@ -149,47 +156,73 @@
     }
 
     .received-label {
-      font-size: 15px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 900;
       opacity: 0.75;
       line-height: 1;
     }
 
     .received-money {
-      font-size: 36px;
-      font-weight: 900;
-      line-height: 1.1;
+      font-size: 32px;
+      font-weight: 1000;
+      line-height: 1.05;
+    }
+
+    .cash-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .cash-button {
+      height: 58px;
+      background: #26384d;
+      color: #ffffff;
+      font-size: 25px;
+    }
+
+    .cash-button span {
+      font-size: 18px;
+      opacity: 0.85;
     }
 
     .keypad {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat(2, 1fr);
-      gap: 8px;
-      min-height: 150px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 7px;
+      min-height: 210px;
     }
 
     .num-button {
-      font-size: 34px;
-      background: #2f2f2f;
+      font-size: 30px;
+      background: #303030;
+    }
+
+    .double-zero {
+      font-size: 25px;
+    }
+
+    .back-button {
+      color: #ff5a5a;
     }
 
     .change-box {
-      border-radius: 22px;
+      border-radius: 20px;
       background: #062b13;
-      padding: 10px 14px;
+      padding: 8px 12px;
       text-align: center;
       border: 3px solid #0f7a35;
     }
 
     .change-label {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
       opacity: 0.9;
     }
 
     .change-money {
-      font-size: 56px;
+      font-size: 48px;
       font-weight: 1000;
       line-height: 1.05;
     }
@@ -200,70 +233,85 @@
     }
 
     .finish-button {
-      height: 70px;
+      height: 56px;
       background: #8b1e1e;
-      font-size: 30px;
-      border-radius: 18px;
+      font-size: 26px;
+      border-radius: 16px;
     }
 
-    .small-note {
-      text-align: center;
-      font-size: 13px;
-      opacity: 0.55;
-      margin-top: -4px;
-    }
-
-    @media (max-height: 660px) {
+    @media (max-height: 670px) {
       .app {
-        gap: 7px;
-        padding: 8px;
+        padding: 6px;
+        gap: 5px;
       }
 
       .title {
-        font-size: 17px;
+        font-size: 18px;
+      }
+
+      .small-note {
+        font-size: 12px;
       }
 
       .count-button,
       .count-display {
-        height: 60px;
+        height: 50px;
       }
 
       .count-display {
-        font-size: 30px;
+        font-size: 26px;
+      }
+
+      button {
+        font-size: 22px;
+        border-radius: 13px;
+      }
+
+      .money-box {
+        padding: 6px 10px;
+      }
+
+      .label {
+        font-size: 14px;
       }
 
       .total {
-        font-size: 36px;
-      }
-
-      .received-row {
-        grid-template-columns: 64px 1fr;
+        font-size: 32px;
       }
 
       .clear-button,
       .received-display {
-        height: 66px;
+        height: 54px;
+      }
+
+      .clear-button {
+        font-size: 20px;
       }
 
       .received-money {
-        font-size: 31px;
+        font-size: 28px;
+      }
+
+      .cash-button {
+        height: 50px;
+        font-size: 22px;
       }
 
       .keypad {
-        min-height: 124px;
+        min-height: 180px;
       }
 
       .num-button {
-        font-size: 30px;
+        font-size: 27px;
       }
 
       .change-money {
-        font-size: 46px;
+        font-size: 40px;
       }
 
       .finish-button {
-        height: 60px;
-        font-size: 26px;
+        height: 50px;
+        font-size: 23px;
       }
     }
   </style>
@@ -290,24 +338,35 @@
     </section>
 
     <section class="received-row">
-      <button class="clear-button" id="clearReceived">0</button>
+      <button class="clear-button" id="clearReceived">クリア</button>
       <div class="received-display">
         <div class="received-label">受取金額</div>
         <div class="received-money" id="receivedDisplay">¥0</div>
       </div>
     </section>
 
+    <section class="cash-row">
+      <button class="cash-button" data-add="1000">+1000</button>
+      <button class="cash-button" data-add="500">+500</button>
+      <button class="cash-button" data-add="50">+50</button>
+    </section>
+
     <section class="keypad">
-      <button class="num-button" data-num="1">1</button>
-      <button class="num-button" data-num="2">2</button>
-      <button class="num-button" data-num="3">3</button>
-      <button class="num-button" data-num="4">4</button>
-      <button class="num-button" data-num="5">5</button>
-      <button class="num-button" data-num="6">6</button>
       <button class="num-button" data-num="7">7</button>
       <button class="num-button" data-num="8">8</button>
       <button class="num-button" data-num="9">9</button>
+
+      <button class="num-button" data-num="4">4</button>
+      <button class="num-button" data-num="5">5</button>
+      <button class="num-button" data-num="6">6</button>
+
+      <button class="num-button" data-num="1">1</button>
+      <button class="num-button" data-num="2">2</button>
+      <button class="num-button" data-num="3">3</button>
+
       <button class="num-button" data-num="0">0</button>
+      <button class="num-button double-zero" data-num="00">00</button>
+      <button class="num-button back-button" id="backspace">←</button>
     </section>
 
     <section class="change-box" id="changeBox">
@@ -337,6 +396,15 @@
 
     function getReceived() {
       return receivedText === "" ? 0 : Number(receivedText);
+    }
+
+    function setReceived(value) {
+      if (value <= 0) {
+        receivedText = "";
+      } else {
+        receivedText = String(value);
+      }
+      update();
     }
 
     function update() {
@@ -399,19 +467,43 @@
 
     document.getElementById("finish").addEventListener("click", resetAll);
 
-    document.querySelectorAll(".num-button").forEach(button => {
+    document.getElementById("backspace").addEventListener("click", () => {
+      receivedText = receivedText.slice(0, -1);
+      update();
+    });
+
+    document.querySelectorAll(".num-button[data-num]").forEach(button => {
       button.addEventListener("click", () => {
         const num = button.dataset.num;
 
-        if (receivedText.length >= 6) return;
+        if (receivedText.length >= 7) return;
 
-        if (receivedText === "" && num === "0") {
+        if (receivedText === "" && (num === "0" || num === "00")) {
           return;
         }
 
         receivedText += num;
+
+        if (receivedText.length > 7) {
+          receivedText = receivedText.slice(0, 7);
+        }
+
         update();
       });
+    });
+
+    document.querySelectorAll(".cash-button").forEach(button => {
+      button.addEventListener("click", () => {
+        const addAmount = Number(button.dataset.add);
+        const current = getReceived();
+        const next = current + addAmount;
+
+        setReceived(next);
+      });
+    });
+
+    document.addEventListener("dblclick", function(event) {
+      event.preventDefault();
     });
 
     update();
