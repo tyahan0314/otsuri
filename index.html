@@ -2,7 +2,10 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+  />
   <title>屋台おつり計算</title>
 
   <style>
@@ -38,28 +41,8 @@
       height: 100dvh;
       padding: 8px;
       display: grid;
-      grid-template-rows: auto auto auto auto auto 1fr auto auto;
-      gap: 7px;
-    }
-
-    .title {
-      text-align: center;
-      font-size: 20px;
-      font-weight: 900;
-      line-height: 1.05;
-    }
-
-    .small-note {
-      text-align: center;
-      font-size: 13px;
-      opacity: 0.6;
-      font-weight: 700;
-    }
-
-    .count-row {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr 1.8fr 1fr 1.2fr;
-      gap: 7px;
+      grid-template-rows: auto auto auto auto 1fr;
+      gap: 8px;
     }
 
     button {
@@ -67,10 +50,9 @@
       border-radius: 15px;
       font-weight: 900;
       color: #fff;
-      background: #333;
-      font-size: 25px;
+      background: #303030;
       cursor: pointer;
-      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.25);
+      box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.25);
       touch-action: manipulation;
       user-select: none;
       -webkit-user-select: none;
@@ -78,29 +60,49 @@
 
     button:active {
       transform: translateY(2px);
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.25);
+      box-shadow: inset 0 -2px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .count-row {
+      display: grid;
+      grid-template-columns: 1.15fr 0.9fr 1.9fr 0.9fr 1.15fr;
+      gap: 7px;
+    }
+
+    .count-button,
+    .count-display {
+      height: 62px;
+      border-radius: 15px;
     }
 
     .count-button {
-      height: 58px;
+      font-size: 25px;
     }
 
     .count-display {
-      height: 58px;
-      border-radius: 15px;
       background: #222;
+      border: 2px solid #444;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      font-size: 30px;
-      font-weight: 900;
-      border: 2px solid #444;
+      line-height: 1.05;
     }
 
-    #setOne,
-    #clearReceived {
+    .count-main {
+      font-size: 27px;
+      font-weight: 1000;
+    }
+
+    .count-price {
+      margin-top: 2px;
+      font-size: 15px;
+      font-weight: 900;
+      opacity: 0.75;
+    }
+
+    #setOne {
       background: #0b6b2b;
-      color: #fff;
     }
 
     #minus {
@@ -112,60 +114,71 @@
       color: #5aa7ff;
     }
 
-    .money-box {
-      border-radius: 18px;
-      background: #1d1d1d;
-      padding: 8px 12px;
+    .section-label {
       text-align: center;
-      border: 2px solid #333;
-    }
-
-    .label {
       font-size: 16px;
       font-weight: 900;
-      opacity: 0.75;
-      margin-bottom: 1px;
+      opacity: 0.8;
+      margin-bottom: 4px;
     }
 
-    .total {
+    .received-section {
+      background: #1d1d1d;
+      border: 2px solid #444;
+      border-radius: 18px;
+      padding: 8px;
+    }
+
+    .received-row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .clear-button {
+      height: 60px;
+      background: #0b6b2b;
+      font-size: 22px;
+    }
+
+    .received-money {
+      height: 60px;
+      border-radius: 15px;
+      background: #222;
+      border: 2px solid #3a3a3a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 36px;
       font-weight: 1000;
       line-height: 1;
     }
 
-    .received-row {
-      display: grid;
-      grid-template-columns: 82px 1fr;
-      gap: 8px;
+    .change-section {
+      background: #062b13;
+      border: 3px solid #0f7a35;
+      border-radius: 20px;
+      padding: 9px 10px;
+      text-align: center;
     }
 
-    .clear-button {
-      height: 62px;
-      font-size: 22px;
-    }
-
-    .received-display {
-      height: 62px;
-      border-radius: 16px;
-      background: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid #444;
-    }
-
-    .received-label {
-      font-size: 13px;
+    .change-label {
+      font-size: 18px;
       font-weight: 900;
-      opacity: 0.75;
+      opacity: 0.9;
+      margin-bottom: 2px;
+    }
+
+    .change-money {
+      font-size: 48px;
+      font-weight: 1000;
       line-height: 1;
     }
 
-    .received-money {
-      font-size: 32px;
-      font-weight: 1000;
-      line-height: 1.05;
+    .shortage {
+      background: #3a0b0b;
+      border-color: #a51d1d;
     }
 
     .cash-row {
@@ -175,143 +188,161 @@
     }
 
     .cash-button {
-      height: 58px;
+      height: 62px;
       background: #26384d;
-      color: #ffffff;
-      font-size: 25px;
-    }
-
-    .cash-button span {
-      font-size: 18px;
-      opacity: 0.85;
+      font-size: 27px;
     }
 
     .keypad {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       grid-template-rows: repeat(4, 1fr);
-      gap: 7px;
-      min-height: 210px;
+      gap: 8px;
+      min-height: 300px;
     }
 
     .num-button {
-      font-size: 30px;
-      background: #303030;
-    }
-
-    .double-zero {
-      font-size: 25px;
+      font-size: 34px;
+      font-weight: 1000;
     }
 
     .back-button {
       color: #ff5a5a;
     }
 
-    .change-box {
-      border-radius: 20px;
-      background: #062b13;
-      padding: 8px 12px;
-      text-align: center;
-      border: 3px solid #0f7a35;
-    }
-
-    .change-label {
-      font-size: 18px;
-      font-weight: 900;
-      opacity: 0.9;
-    }
-
-    .change-money {
-      font-size: 48px;
-      font-weight: 1000;
-      line-height: 1.05;
-    }
-
-    .shortage {
-      background: #3a0b0b;
-      border-color: #a51d1d;
-    }
-
     .finish-button {
-      height: 56px;
       background: #8b1e1e;
-      font-size: 26px;
-      border-radius: 16px;
+      font-size: 22px;
+      line-height: 1.1;
+      padding: 0 4px;
     }
 
-    @media (max-height: 670px) {
+    @media (max-height: 700px) {
       .app {
         padding: 6px;
-        gap: 5px;
-      }
-
-      .title {
-        font-size: 18px;
-      }
-
-      .small-note {
-        font-size: 12px;
+        gap: 6px;
       }
 
       .count-button,
       .count-display {
-        height: 50px;
-      }
-
-      .count-display {
-        font-size: 26px;
-      }
-
-      button {
-        font-size: 22px;
-        border-radius: 13px;
-      }
-
-      .money-box {
-        padding: 6px 10px;
-      }
-
-      .label {
-        font-size: 14px;
-      }
-
-      .total {
-        font-size: 32px;
-      }
-
-      .clear-button,
-      .received-display {
         height: 54px;
       }
 
-      .clear-button {
-        font-size: 20px;
-      }
-
-      .received-money {
-        font-size: 28px;
-      }
-
-      .cash-button {
-        height: 50px;
+      .count-button {
         font-size: 22px;
       }
 
-      .keypad {
-        min-height: 180px;
+      .count-main {
+        font-size: 24px;
       }
 
-      .num-button {
-        font-size: 27px;
+      .count-price {
+        font-size: 13px;
+      }
+
+      .section-label {
+        font-size: 14px;
+        margin-bottom: 3px;
+      }
+
+      .received-section {
+        padding: 6px;
+      }
+
+      .clear-button,
+      .received-money {
+        height: 52px;
+      }
+
+      .clear-button {
+        font-size: 19px;
+      }
+
+      .received-money {
+        font-size: 31px;
+      }
+
+      .change-section {
+        padding: 7px 8px;
+      }
+
+      .change-label {
+        font-size: 15px;
       }
 
       .change-money {
         font-size: 40px;
       }
 
+      .cash-button {
+        height: 52px;
+        font-size: 24px;
+      }
+
+      .keypad {
+        min-height: 245px;
+        gap: 6px;
+      }
+
+      .num-button {
+        font-size: 29px;
+      }
+
       .finish-button {
-        height: 50px;
-        font-size: 23px;
+        font-size: 19px;
+      }
+    }
+
+    @media (max-height: 620px) {
+      .app {
+        gap: 5px;
+      }
+
+      .count-button,
+      .count-display {
+        height: 48px;
+      }
+
+      .count-button {
+        font-size: 20px;
+      }
+
+      .count-main {
+        font-size: 22px;
+      }
+
+      .count-price {
+        font-size: 12px;
+      }
+
+      .clear-button,
+      .received-money {
+        height: 46px;
+      }
+
+      .received-money {
+        font-size: 27px;
+      }
+
+      .change-money {
+        font-size: 34px;
+      }
+
+      .cash-button {
+        height: 46px;
+        font-size: 21px;
+      }
+
+      .keypad {
+        min-height: 220px;
+      }
+
+      .num-button {
+        font-size: 25px;
+      }
+
+      .finish-button {
+        font-size: 17px;
       }
     }
   </style>
@@ -319,30 +350,30 @@
 
 <body>
   <main class="app">
-    <div>
-      <div class="title">屋台おつり計算</div>
-      <div class="small-note">350円固定</div>
-    </div>
-
     <section class="count-row">
       <button class="count-button" id="setOne">1本</button>
       <button class="count-button" id="minus">−</button>
-      <div class="count-display" id="countDisplay">1本</div>
+
+      <div class="count-display">
+        <div class="count-main" id="countDisplay">1本</div>
+        <div class="count-price" id="totalDisplay">¥350</div>
+      </div>
+
       <button class="count-button" id="plus">＋</button>
       <button class="count-button" id="plusFive">＋5</button>
     </section>
 
-    <section class="money-box">
-      <div class="label">販売金額</div>
-      <div class="total" id="totalDisplay">¥350</div>
-    </section>
-
-    <section class="received-row">
-      <button class="clear-button" id="clearReceived">クリア</button>
-      <div class="received-display">
-        <div class="received-label">受取金額</div>
+    <section class="received-section">
+      <div class="section-label">受取金額</div>
+      <div class="received-row">
+        <button class="clear-button" id="clearReceived">クリア</button>
         <div class="received-money" id="receivedDisplay">¥0</div>
       </div>
+    </section>
+
+    <section class="change-section" id="changeBox">
+      <div class="change-label" id="changeLabel">おつり</div>
+      <div class="change-money" id="changeDisplay">¥0</div>
     </section>
 
     <section class="cash-row">
@@ -365,16 +396,9 @@
       <button class="num-button" data-num="3">3</button>
 
       <button class="num-button" data-num="0">0</button>
-      <button class="num-button double-zero" data-num="00">00</button>
       <button class="num-button back-button" id="backspace">←</button>
+      <button class="num-button finish-button" id="finish">会計<br>完了</button>
     </section>
-
-    <section class="change-box" id="changeBox">
-      <div class="change-label" id="changeLabel">おつり</div>
-      <div class="change-money" id="changeDisplay">¥0</div>
-    </section>
-
-    <button class="finish-button" id="finish">会計完了</button>
   </main>
 
   <script>
@@ -404,6 +428,7 @@
       } else {
         receivedText = String(value);
       }
+
       update();
     }
 
@@ -477,17 +502,9 @@
         const num = button.dataset.num;
 
         if (receivedText.length >= 7) return;
-
-        if (receivedText === "" && (num === "0" || num === "00")) {
-          return;
-        }
+        if (receivedText === "" && num === "0") return;
 
         receivedText += num;
-
-        if (receivedText.length > 7) {
-          receivedText = receivedText.slice(0, 7);
-        }
-
         update();
       });
     });
@@ -496,13 +513,11 @@
       button.addEventListener("click", () => {
         const addAmount = Number(button.dataset.add);
         const current = getReceived();
-        const next = current + addAmount;
-
-        setReceived(next);
+        setReceived(current + addAmount);
       });
     });
 
-    document.addEventListener("dblclick", function(event) {
+    document.addEventListener("dblclick", event => {
       event.preventDefault();
     });
 
